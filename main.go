@@ -1,26 +1,48 @@
 package main
 
+import (
+	"Omok/omok"
+	"fmt"
+)
+
 func main() {
-	// board := Board{}
-	// board.initBoard()
+	board := omok.NewBoard()
+	board.InitBoard()
+	board.PrintBoard()
 
-	// var row, colum int
+	playerOne := omok.NewStone(omok.ONE_PLAYER)
+	playerTwo := omok.NewStone(omok.TWO_PLAYER)
+	var switcher = omok.ONE_PLAYER
 
-	// player1 := Stone{stoneStatus: ONE_PLAYER}
-	// // player2 := Stone{stoneStatus: TWO_PLAYER, row: 0, colum: 0}
+	for {
+		switch switcher {
 
-	// for {
-	// 	fmt.Scan(&row, &colum)
-	// 	if !board.checkStonePresence(row, colum) {
-	// 		player1.placeMove(&board, row, colum)
-	// 	} else {
-	// 		fmt.Println("이미 있어요!")
-	// 	}
+		case omok.ONE_PLAYER:
+			fmt.Println("PlayerOne")
+			fmt.Scan(&playerOne.Row, &playerOne.Colum)
+			if !playerOne.PlaceMove(&board) {
+				fmt.Println("제대로 하세요!")
+				continue
+			}
+			switcher = omok.TWO_PLAYER
+			if board.CheckWinner(&playerOne) {
+				fmt.Println("PlyaerOne! WIN")
+				return
+			}
 
-	// 	if board.checkWinner(player1, row, colum) {
-	// 		fmt.Println("WIN!")
-	// 	}
-
-	// 	board.printBoard()
-	// }
+		case omok.TWO_PLAYER:
+			fmt.Println("PlayerTwo")
+			fmt.Scan(&playerTwo.Row, &playerTwo.Colum)
+			if !playerTwo.PlaceMove(&board) {
+				fmt.Println("제대로 하세요!")
+				continue
+			}
+			switcher = omok.ONE_PLAYER
+			if board.CheckWinner(&playerTwo) {
+				fmt.Println("PlayerTwo! WIN")
+				return
+			}
+		}
+		board.PrintBoard()
+	}
 }
