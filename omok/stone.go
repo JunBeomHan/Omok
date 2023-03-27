@@ -19,7 +19,6 @@ func (s *Stone) SetStoneStatus(stoneStatus int) {
 }
 
 // placemove 하는 자리에 돌이 존재하면 안됌
-
 func (s *Stone) checkDanger(b *Board) bool {
 	// 인덱스 범위 벗어나면 안됌
 	if s.Row > 14 && s.Colum > 14 || s.Row < 0 && s.Colum < 0 || b.board[s.Row][s.Colum] != 0 {

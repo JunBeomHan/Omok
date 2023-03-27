@@ -16,7 +16,6 @@ func main() {
 
 	for {
 		switch switcher {
-
 		case omok.ONE_PLAYER:
 			fmt.Println("PlayerOne")
 			fmt.Scan(&playerOne.Row, &playerOne.Colum)
