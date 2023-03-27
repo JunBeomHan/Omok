@@ -27,6 +27,7 @@ func main() {
 			switcher = omok.TWO_PLAYER
 			if board.CheckWinner(&playerOne) {
 				fmt.Println("PlyaerOne! WIN")
+				board.PrintBoard()
 				return
 			}
 
@@ -40,6 +41,7 @@ func main() {
 			switcher = omok.ONE_PLAYER
 			if board.CheckWinner(&playerTwo) {
 				fmt.Println("PlayerTwo! WIN")
+				board.PrintBoard()
 				return
 			}
 		}
