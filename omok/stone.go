@@ -22,7 +22,7 @@ func (s *Stone) SetStoneStatus(stoneStatus int) {
 
 func (s *Stone) checkDanger(b *Board) bool {
 	// 인덱스 범위 벗어나면 안됌
-	if s.Colum > 14 && s.Row > 14 || b.board[s.Colum][s.Row] != 0 {
+	if s.Colum > 14 && s.Row > 14 || b.board[s.Row][s.Colum] != 0 {
 		return false
 	}
 	return true
