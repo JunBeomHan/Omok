@@ -18,7 +18,7 @@ func main() {
 		switch switcher {
 		case omok.ONE_PLAYER:
 			fmt.Println("PlayerOne")
-			fmt.Scan(&playerOne.Row, &playerOne.Colum)
+			fmt.Scan(&playerOne.Colum, &playerOne.Row)
 			if !playerOne.PlaceMove(&board) {
 				fmt.Println("제대로 하세요!")
 				continue
@@ -32,7 +32,7 @@ func main() {
 
 		case omok.TWO_PLAYER:
 			fmt.Println("PlayerTwo")
-			fmt.Scan(&playerTwo.Row, &playerTwo.Colum)
+			fmt.Scan(&playerTwo.Colum, &playerTwo.Row)
 			if !playerTwo.PlaceMove(&board) {
 				fmt.Println("제대로 하세요!")
 				continue

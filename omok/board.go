@@ -55,7 +55,7 @@ func (b *Board) PrintBoard() {
 
 // CheckStonePresence는 바둑돌이 있으면 1, 없으면 0을 반환합니다.
 func (b *Board) CheckStonePresence(s *Stone) bool {
-	return b.board[s.Row][s.Colum] != EMPTY
+	return b.board[s.Colum][s.Row] != EMPTY
 }
 
 func (b *Board) CheckWinner(s *Stone) bool {
@@ -66,13 +66,13 @@ func (b *Board) CheckWinner(s *Stone) bool {
 }
 
 func isCaseOne(b *Board, s *Stone) bool {
-	//	(s.Colum - 4) ~ s.Cloum 	< 	case 1
-	if (s.Colum - 4) < 0 {
+
+	if (s.Row - 4) < 0 {
 		return false
 	}
 
-	for i := s.Colum - 4; i <= s.Colum; i++ {
-		if s.stoneStatus != b.board[s.Row][i] {
+	for i := s.Row - 4; i <= s.Row; i++ {
+		if s.stoneStatus != b.board[s.Colum][i] {
 			return false
 		}
 	}
@@ -81,13 +81,13 @@ func isCaseOne(b *Board, s *Stone) bool {
 }
 
 func isCaseTwo(b *Board, s *Stone) bool {
-	// 	(s.Colum) ~ (s.Cloum + 4) 	>	case 2
-	if (s.Colum + 4) > 14 {
+
+	if (s.Row + 4) > 14 {
 		return false
 	}
 
-	for i := s.Colum; i <= s.Colum+4; i++ {
-		if s.stoneStatus != b.board[s.Row][i] {
+	for i := s.Row; i <= s.Row+4; i++ {
+		if s.stoneStatus != b.board[s.Colum][i] {
 			return false
 		}
 	}
@@ -95,13 +95,13 @@ func isCaseTwo(b *Board, s *Stone) bool {
 }
 
 func isCaseThree(b *Board, s *Stone) bool {
-	// 	(s.Row - 4) ~ (s.Row) 		v	case 3
-	if (s.Row - 4) < 0 {
+
+	if (s.Colum - 4) < 0 {
 		return false
 	}
 
-	for i := s.Row - 4; i <= s.Row; i++ {
-		if s.stoneStatus != b.board[i][s.Colum] {
+	for i := s.Colum - 4; i <= s.Colum; i++ {
+		if s.stoneStatus != b.board[i][s.Row] {
 			return false
 		}
 	}
@@ -109,13 +109,13 @@ func isCaseThree(b *Board, s *Stone) bool {
 }
 
 func isCaseFour(b *Board, s *Stone) bool {
-	//  (s.Row) ~ (s.Row + 4) 		^	case 4
-	if (s.Row + 4) > 14 {
+
+	if (s.Colum + 4) > 14 {
 		return false
 	}
 
-	for i := s.Row; i <= s.Row+4; i++ {
-		if s.stoneStatus != b.board[i][s.Colum] {
+	for i := s.Colum; i <= s.Colum+4; i++ {
+		if s.stoneStatus != b.board[i][s.Row] {
 			return false
 		}
 	}
@@ -123,16 +123,16 @@ func isCaseFour(b *Board, s *Stone) bool {
 }
 
 func isCaseSix(b *Board, s *Stone) bool {
-	if s.Row+4 > 14 || s.Colum+4 > 14 {
+	if s.Colum+4 > 14 || s.Row+4 > 14 {
 		return false
 	}
 	// \ case
 
-	row, colum := s.Row, s.Colum
+	colum, row := s.Colum, s.Row
 	for i := 1; i <= 4; i++ {
-		row++
 		colum++
-		if s.stoneStatus != b.board[row][colum] {
+		row++
+		if s.stoneStatus != b.board[colum][row] {
 			return false
 		}
 	}
@@ -140,16 +140,15 @@ func isCaseSix(b *Board, s *Stone) bool {
 }
 
 func isCaseSeven(b *Board, s *Stone) bool {
-	if s.Row-4 < 0 || s.Colum-4 < 0 {
+	if s.Colum-4 < 0 || s.Row-4 < 0 {
 		return false
 	}
-	// / case
 
-	row, colum := s.Row, s.Colum
+	colum, row := s.Colum, s.Row
 	for i := 1; i <= 4; i++ {
-		row--
 		colum--
-		if s.stoneStatus != b.board[row][colum] {
+		row--
+		if s.stoneStatus != b.board[colum][row] {
 			return false
 		}
 	}
